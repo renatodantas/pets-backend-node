@@ -11,17 +11,11 @@ pids
 *.seed
 *.pid.lock
 
+# Configuração padrão (deve ser configurado manualmente)
+.env
+
 # Dependency directories
 node_modules/
-
-# TypeScript compilation
 dist/
-
-# Optional npm cache directory
 .npm
-
-# Optional eslint cache
 .eslintcache
-
-# dotenv environment variables file
-.env

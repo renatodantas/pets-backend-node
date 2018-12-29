@@ -1,7 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn, BaseEntity } from 'typeorm'
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
-export class Dono extends BaseEntity {
+@Entity({ name: 'tb_dono' })
+export default class Dono {
   
   @PrimaryGeneratedColumn()
   id: number

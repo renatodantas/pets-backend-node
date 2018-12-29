@@ -1,11 +1,15 @@
 import { Router, Request, Response, NextFunction } from 'express'
+import { getManager } from 'typeorm';
+import Dono from '../entities/dono';
 
 const router = Router()
 
 /* GET donos */
-router.get('/', (req: Request, res: Response, next: NextFunction) => {
-  console.log('Donos!');
-  res.sendStatus(403);
+router.get('/', async (req: Request, res: Response, next: NextFunction) => {
+  const donoRepository = getManager().getRepository(Dono)
+  const donos:Dono[] = await donoRepository.find()
+  console.log('donos encontrados:', donos)
+  res.json(donos)
 })
 
 /* GET dono by ID */
