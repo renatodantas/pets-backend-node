@@ -1,9 +1,7 @@
 // Reference: https://node-postgres.com/features/connecting
 
-import pg from 'pg'
-
 export function test() {
-  const pool = new pg.Pool()
+  // const pool: Pool = new Pool()
   console.log('Testando conexão do banco!')
-  console.log(pool)
+  //console.log(pool)
 }

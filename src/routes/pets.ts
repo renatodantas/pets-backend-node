@@ -1,16 +1,17 @@
-import express from 'express'
+import { NextFunction, Request, Response, Router } from 'express';
+import { Pet, TipoPet } from '../models/pet';
 
-const router = express.Router()
+const router = Router()
 
 // fake pets
-const pets = [
-  { id: 1, nome: 'Sarugo', tipo: 'CACHORRO' },
-  { id: 2, nome: 'Maneta', tipo: 'GATO' },
-  { id: 3, nome: 'Loro', tipo: 'PASSARO' },
+const pets: Array<Pet> = [
+  { id: 1, nome: 'Sarugo', tipo: TipoPet.CACHORRO },
+  { id: 2, nome: 'Maneta', tipo: TipoPet.GATO },
+  { id: 3, nome: 'Loro', tipo: TipoPet.PASSARO },
 ]
 
 /* GET pets */
-router.get('/', (req, res, next) => {
+router.get('/', (req: Request, res: Response, next: NextFunction) => {
   res.json(pets)
 })
 

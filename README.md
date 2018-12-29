@@ -15,6 +15,7 @@ Para criar banco de dados que servirá de exemplo para o projeto (usando docker)
   --name pets \
   -v pets:/var/lib/postgresql/data \
   -e POSTGRES_PASSWORD=123456 \
+  -p 5432:5432
   -d postgres:11`
 
 Para iniciar o banco depois de criado:
