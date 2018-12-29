@@ -1,24 +1,28 @@
-import express from 'express';
-import path from 'path';
-import cookieParser from 'cookie-parser';
-import logger from 'morgan';
-import dotenv from 'dotenv';
+import express from 'express'
+import path from 'path'
+import cookieParser from 'cookie-parser'
+import logger from 'morgan'
+import dotenv from 'dotenv'
 
-import indexRouter from './routes';
+import indexRouter from './routes'
+import * as db from './db'
 
 // Carrega configurações de ambiente
-dotenv.config();
+dotenv.config()
 
 // Middlewares
-const app = express(); 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+const app = express() 
+app.use(logger('dev'))
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+app.use(cookieParser())
+app.use(express.static(path.join(__dirname, 'public')))
 
 // Routes
-app.use('/api', indexRouter);
+app.use('/api', indexRouter)
+
+// DB
+db.test()
 
 // Inicialização
-app.listen(8080, () => console.log('Subindo na porta 8080!'));
+app.listen(8080, () => console.log('Subindo na porta 8080!'))
