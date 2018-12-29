@@ -1,13 +1,6 @@
 {
-  "ignore": [
-    ".git",
-    "node_modules/**/node_modules"
-  ],
-  "verbose": true,
-  "delay": "2000",
-  "watch": ["dist", ".env"],
-  "env": {
-    "NODE_ENV": "development"
-  },
-  "ext": "js"
+  "watch": ["src", ".env"],
+  "ext": "ts",
+  "ignore": ["src/**/*.spec.ts"],
+  "exec": "ts-node ./src/index.ts"
 }
