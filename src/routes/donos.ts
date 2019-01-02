@@ -1,6 +1,6 @@
 import { Router, Request, Response, NextFunction } from 'express'
 import { getManager } from 'typeorm';
-import Dono from '../entities/dono';
+import Dono from '../models/dono';
 
 const router = Router()
 
