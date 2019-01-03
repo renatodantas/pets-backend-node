@@ -2,7 +2,7 @@ import {MigrationInterface, QueryRunner} from "typeorm";
 
 export class InserirDonos1546442677597 implements MigrationInterface {
 
-    private donos = ['Renato', 'Marcelo', 'Henrique'];
+    private readonly donos = ['Renato', 'Marcelo', 'Henrique'];
 
     public async up(queryRunner: QueryRunner): Promise<any> {
         this.donos.forEach(dono => 
