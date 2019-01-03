@@ -1,26 +1,26 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import { Pet, TipoPet } from '../models/pet';
+import { Pet } from '../models/pet';
+import { getManager } from 'typeorm';
 
 const router = Router()
 
-// fake pets
-const pets: Array<Pet> = [
-  { id: 1, nome: 'Sarugo', tipo: TipoPet.CACHORRO },
-  { id: 2, nome: 'Maneta', tipo: TipoPet.GATO },
-  { id: 3, nome: 'Loro', tipo: TipoPet.PASSARO },
-]
-
 /* GET pets */
-router.get('/', (req: Request, res: Response, next: NextFunction) => {
+router.get('/', async (req: Request, res: Response, next: NextFunction) => {
+  const petRepository = getManager().getRepository(Pet)
+  const pets:Pet[] = await petRepository.find()
+  
+  console.log('pets encontrados:', pets)
   res.json(pets)
 })
 
 /* GET pet by ID */
-router.get('/:id', (req, res) => {
-  const pet = pets.filter(p => p.id == req.params['id'])
-  if (pet.length > 0)
-    res.json(pet[0])
-  else
+router.get('/:id', async (req, res) => {
+  const petRepository = getManager().getRepository(Pet)
+  const pet:Pet = await petRepository.findOne(req.params.id)
+  
+  console.log(`pet por id ${req.params.id}:`, pet)
+  return pet ? 
+    res.json(pet) :
     res.status(404).send('Pet não encontrado')
 })
 

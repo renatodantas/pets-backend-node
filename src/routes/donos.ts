@@ -8,13 +8,20 @@ const router = Router()
 router.get('/', async (req: Request, res: Response, next: NextFunction) => {
   const donoRepository = getManager().getRepository(Dono)
   const donos:Dono[] = await donoRepository.find()
+
   console.log('donos encontrados:', donos)
   res.json(donos)
 })
 
 /* GET dono by ID */
-router.get('/:id', (req: Request, res: Response) => {
-  res.status(404).send('Dono não encontrado')
+router.get('/:id', async (req: Request, res: Response) => {
+  const donoRepository = getManager().getRepository(Dono)
+  const dono:Dono = await donoRepository.findOne(req.params.id)
+
+  console.log(`dono por id ${req.params.id}:`, dono)
+  return dono ? 
+    res.json(dono) :
+    res.status(404).send('Dono não encontrado')
 })
 
 export default router
