@@ -6,19 +6,28 @@ const router = Router()
 
 /* GET pets */
 router.get('/', async (req: Request, res: Response, next: NextFunction) => {
-  const petRepository = getManager().getRepository(Pet)
-  const pets:Pet[] = await petRepository.find()
+  const pets:Pet[] = await getManager()
+    .createQueryBuilder(Pet, 'p')
+    .innerJoinAndSelect('p.dono', 'd')
+    .getMany()
   
-  console.log('pets encontrados:', pets)
+  if (process.env.NODE_ENV === 'dev')
+    console.log('pets encontrados:', pets.length)
+
   res.json(pets)
 })
 
 /* GET pet by ID */
-router.get('/:id', async (req, res) => {
-  const petRepository = getManager().getRepository(Pet)
-  const pet:Pet = await petRepository.findOne(req.params.id)
+router.get('/:id(\\d+)', async (req, res) => {
+  const pet:Pet = await getManager()
+    .createQueryBuilder(Pet, 'p')
+    .innerJoinAndSelect('p.dono', 'd')
+    .whereInIds(req.params.id)
+    .getOne()
   
-  console.log(`pet por id ${req.params.id}:`, pet)
+  if (process.env.NODE_ENV === 'dev')
+    console.log(`pet por id ${req.params.id}:`, pet)
+
   return pet ? 
     res.json(pet) :
     res.status(404).send('Pet não encontrado')

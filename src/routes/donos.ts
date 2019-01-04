@@ -14,7 +14,7 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
 })
 
 /* GET dono by ID */
-router.get('/:id', async (req: Request, res: Response) => {
+router.get('/:id(\\d+)', async (req: Request, res: Response) => {
   const donoRepository = getManager().getRepository(Dono)
   const dono:Dono = await donoRepository.findOne(req.params.id)
 
