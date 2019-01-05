@@ -9,7 +9,9 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
   const donoRepository = getManager().getRepository(Dono)
   const donos:Dono[] = await donoRepository.find()
 
-  console.log('donos encontrados:', donos)
+  if (process.env.NODE_ENV === 'dev')
+    console.log('donos encontrados:', donos)
+
   res.json(donos)
 })
 
@@ -18,7 +20,9 @@ router.get('/:id(\\d+)', async (req: Request, res: Response) => {
   const donoRepository = getManager().getRepository(Dono)
   const dono:Dono = await donoRepository.findOne(req.params.id)
 
-  console.log(`dono por id ${req.params.id}:`, dono)
+  if (process.env.NODE_ENV === 'dev')
+    console.log(`dono por id ${req.params.id}:`, dono)
+    
   return dono ? 
     res.json(dono) :
     res.status(404).send('Dono não encontrado')

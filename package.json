@@ -5,7 +5,7 @@
   "scripts": {
     "start": "npm run migrations:run && npm run dev",
     "dev": "nodemon",
-    "db:create": "docker run --name pets -v pets:/var/lib/postgresql/data -e POSTGRES_PASSWORD=123456 -p 5432:5432 -d postgres:11",
+    "db:create": "docker run --name pets -v pets:/var/lib/postgresql/data -e POSTGRES_USER=pets -e POSTGRES_PASSWORD=pets -p 5432:5432 -d postgres:11",
     "db:start": "docker start pets",
     "migrations:run": "ts-node ./node_modules/typeorm/cli.js migration:run",
     "migrations:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert",

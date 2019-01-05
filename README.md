@@ -18,7 +18,7 @@ Para criar banco de dados do projeto com as configurações padrões, use o coma
 
 > É necessário o Docker instalado para que o banco de dados suba com sucesso.
 
-O comando acima sobre um banco Postgres 11.x na porta `5432` com o usuário `postgres` e senha `123456`.
+O comando acima sobre um banco Postgres 11.x na porta `5432` com o usuário `pets` e senha `pets`.
 
 Caso queira subir o container com configurações diferentes, execute o comando usado no arquivo `package.json` para ajustar os parâmetros.
 

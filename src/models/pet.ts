@@ -1,32 +1,24 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import Dono from './dono';
+import TipoPet from './tipoPet';
 
 @Entity({ name: 'tb_pet' })
-export class Pet {
+export default class Pet {
   
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column({ length: 50 })
+  @Column({ length: 50, nullable: false })
   nome: string
 
-  @Column()
+  @Column({ nullable: false })
   ativo: boolean
 
-  @Column()
+  @ManyToOne(type => TipoPet, { nullable: false, eager: true })
+  @JoinColumn({ name: 'id_tipo_pet' })
   tipo: TipoPet
 
-  @ManyToOne(type => Dono)
+  @ManyToOne(type => Dono, { nullable: false, eager: true })
   @JoinColumn({ name: 'id_dono' })
   dono: Dono
-}
-
-export enum TipoPet {
-  CACHORRO = "CACHORRO",
-  GATO     = "GATO",
-  PASSARO  = "PASSARO"
-}
-
-export function tipoPetValues(): string[] {
-  return Object.keys(TipoPet)
 }
